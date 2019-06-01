@@ -1,6 +1,7 @@
 # H2rename.pro
 TEMPLATE = app
-
+QT += widgets
+QT+= concurrent
 # Input
 HEADERS += h2rename.h
 FORMS += h2rename.ui \

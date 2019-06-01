@@ -161,7 +161,7 @@
     <name>H2renameClass</name>
     <message>
         <location filename="h2rename.ui" line="14"/>
-        <source>H2rename 0.8.1</source>
+        <source>H2rename 0.8.2</source>
         <oldsource>H2rename 0.8</oldsource>
         <translation></translation>
     </message>

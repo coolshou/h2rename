@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>H2rename 0.8.1</string>
+   <string>H2rename 0.8.2</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">

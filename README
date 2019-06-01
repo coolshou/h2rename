@@ -13,3 +13,5 @@ www.heise.de/artikel-archiv/ct/2009/15/186
 
 Binaries for Windows, Mac OS and Linux (probably outdated) can be
 downloaded from www.ct.de/-292168
+
+Ported to from Qt4 to Qt5 and set new release version to 0.8.2 

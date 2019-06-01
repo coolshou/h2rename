@@ -1,7 +1,7 @@
 /*
 	This file is part of H2rename.
 
-	Copyright (C) 2009 by Harald Bögeholz / c't Magazin für Computertechnik
+	Copyright (C) 2009 by Harald BÃ¶geholz / c't Magazin fÃ¼r Computertechnik
 	www.ctmagazin.de
 
 	This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,8 @@
 #ifndef H2RENAME_H
 #define H2RENAME_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
+#include <QAction>
 #include <QThread>
 #include <QMutex>
 #include <QSortFilterProxyModel>
@@ -248,7 +249,7 @@ class H2rename : public QWidget
 	Q_OBJECT
 
 public:
-	H2rename(QWidget *parent = 0, Qt::WFlags flags = 0);
+	H2rename(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	~H2rename();
 	enum Colors {CollisionColor = 0xff0000, HighlightColor = 0xffe489, ErrorColor = 0xff0000};
 private:
@@ -290,7 +291,7 @@ class ReadDirProgressDialog : public QDialog
 	Q_OBJECT
 
 public:
-	ReadDirProgressDialog(QWidget *parent = 0, Qt::WFlags flags = 0);
+	ReadDirProgressDialog(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 
 	Ui::ReadDirProgressDialog ui;
 };

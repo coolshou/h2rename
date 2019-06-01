@@ -1,7 +1,7 @@
 /*
 	This file is part of H2rename.
 
-	Copyright (C) 2009 by Harald Bögeholz / c't Magazin für Computertechnik
+	Copyright (C) 2009 by Harald BÃ¶geholz / c't Magazin fÃ¼r Computertechnik
 	www.ctmagazin.de
 
 	This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTranslator>
 #include "h2rename.h"
 
