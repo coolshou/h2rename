@@ -14,6 +14,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A batch renaming program for files and directories
  It DOES NOT support regular expressions. Its strength is recognizing
-special characters like umlauts that have been broken by transfering
-files between, e.g., Windows and Linux. In this case H2rename will
-automatically suggest renaming rules to fix them.
+ special characters like umlauts that have been broken by transfering
+ files between, e.g., Windows and Linux. In this case H2rename will
+ automatically suggest renaming rules to fix them.
