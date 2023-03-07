@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
 	appTranslator.load("h2rename_" + QLocale::system().name(), ":/");
 	a.installTranslator(&appTranslator);
 
-	QTranslator qtTranslator;
-	qtTranslator.load("qt_" + QLocale::system().name(), ":/");
-	a.installTranslator(&qtTranslator);
+	// QTranslator qtTranslator;
+	// qtTranslator.load("qt_" + QLocale::system().name(), ":/");
+	// a.installTranslator(&qtTranslator);
 
 	H2rename w;
 	w.show();
