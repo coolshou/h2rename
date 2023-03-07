@@ -1,0 +1,19 @@
+Source: h2rename
+Section: unknown
+Priority: optional
+Maintainer: coolshou <coolshou2060@gmail.com>
+Build-Depends: debhelper-compat (= 13), qtbase5-dev, make, qt5-qmake
+Standards-Version: 4.6.0
+Homepage: https://github.com/coolshou/h2rename
+#Vcs-Browser: https://salsa.debian.org/debian/h2rename
+#Vcs-Git: https://salsa.debian.org/debian/h2rename.git
+Rules-Requires-Root: no
+
+Package: h2rename
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A batch renaming program for files and directories
+ It DOES NOT support regular expressions. Its strength is recognizing
+special characters like umlauts that have been broken by transfering
+files between, e.g., Windows and Linux. In this case H2rename will
+automatically suggest renaming rules to fix them.
