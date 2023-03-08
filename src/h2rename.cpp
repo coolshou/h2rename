@@ -442,7 +442,8 @@ void NamesModel::computeNewNames()
 
 const Name &NamesModel::constNameAt(int row) const
 {
-	QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
+	// QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
+	QVector<int>::const_iterator p = std::upper_bound(rowOffset.constBegin(), rowOffset.constEnd(), row);
 	if (p == rowOffset.constEnd() || *p > row)
 		--p; // müsste eigentlich jedes Mal passieren
 	int i = p - rowOffset.constBegin();
@@ -452,7 +453,8 @@ const Name &NamesModel::constNameAt(int row) const
 
 Name &NamesModel::nameAt(int row)
 {
-	QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
+	// QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
+	QVector<int>::const_iterator p = std::upper_bound(rowOffset.constBegin(), rowOffset.constEnd(), row);
 	if (p == rowOffset.constEnd() || *p > row)
 		--p; // müsste eigentlich jedes Mal passieren
 	int i = p - rowOffset.constBegin();
@@ -463,7 +465,8 @@ Name &NamesModel::nameAt(int row)
 void NamesFilterProxyModel::highlightsChanged()
 {
 	if (curFilter == ShowHighlights)
-		filterChanged();
+		// filterChanged();
+		invalidateFilter();
 }
 
 bool NamesFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
