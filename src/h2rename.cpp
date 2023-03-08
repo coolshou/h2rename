@@ -18,7 +18,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "h2rename.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -39,12 +38,10 @@ bool isLongerThan(const QString &s, const QString &t)
 	return s.length() > t.length();
 }
 
-
 RenameRulesModel::RenameRulesModel(QObject *parent)
 	: QAbstractTableModel(parent)
 {
 }
-
 
 bool RenameRulesModel::containsSearchString(const QString &s) const
 {
@@ -54,7 +51,6 @@ bool RenameRulesModel::containsSearchString(const QString &s) const
 	return false;
 }
 
-
 void RenameRulesModel::appendRules(const QList<RenameRule> &rules)
 {
 	beginResetModel();
@@ -63,7 +59,7 @@ void RenameRulesModel::appendRules(const QList<RenameRule> &rules)
 		if (!containsSearchString(p->column[RenameRule::Search]))
 		{
 			this->rules.append(*p);
-			//nColumns = 3;
+			// nColumns = 3;
 		}
 	}
 	endResetModel();
@@ -72,8 +68,8 @@ void RenameRulesModel::appendRules(const QList<RenameRule> &rules)
 
 void RenameRulesModel::setHighlights(const QVector<bool> &highlights)
 {
-	for (int i=0; i<rules.count(); ++i)
-		if (i<highlights.count() && highlights.at(i))
+	for (int i = 0; i < rules.count(); ++i)
+		if (i < highlights.count() && highlights.at(i))
 			rules[i].highlight = true;
 		else
 			rules[i].highlight = false;
@@ -82,7 +78,7 @@ void RenameRulesModel::setHighlights(const QVector<bool> &highlights)
 
 void RenameRulesModel::clearHighlights()
 {
-	for (int i=0; i<rules.count(); ++i)
+	for (int i = 0; i < rules.count(); ++i)
 		rules[i].highlight = false;
 	emit dataChanged(createIndex(0, 0), createIndex(rules.count(), 1));
 }
@@ -100,7 +96,7 @@ int RenameRulesModel::rowCount(const QModelIndex & /* parent */) const
 	return rules.count() + 1;
 }
 
-int RenameRulesModel::columnCount(const QModelIndex & /* parent */ ) const
+int RenameRulesModel::columnCount(const QModelIndex & /* parent */) const
 {
 	return RenameRule::NCOLUMNS;
 }
@@ -109,7 +105,7 @@ QVariant RenameRulesModel::data(const QModelIndex &index, int role) const
 {
 	if (index.isValid())
 	{
-		switch(role)
+		switch (role)
 		{
 		case Qt::TextAlignmentRole:
 			return int(Qt::AlignLeft | Qt::AlignVCenter);
@@ -122,12 +118,11 @@ QVariant RenameRulesModel::data(const QModelIndex &index, int role) const
 				return rules.at(index.row()).column[index.column()];
 
 		case Qt::ForegroundRole:
-			if (index.row() < rules.count() && 
+			if (index.row() < rules.count() &&
 				(rules.at(index.row()).column[RenameRule::Search].isEmpty() ||
-				rules.at(index.row()).column[RenameRule::Replace].contains(QChar('\\')) ||
-				rules.at(index.row()).column[RenameRule::Replace].contains(QChar('/')) ||
-				rules.at(index.row()).column[RenameRule::Replace].contains(QChar(':'))
-				))
+				 rules.at(index.row()).column[RenameRule::Replace].contains(QChar('\\')) ||
+				 rules.at(index.row()).column[RenameRule::Replace].contains(QChar('/')) ||
+				 rules.at(index.row()).column[RenameRule::Replace].contains(QChar(':'))))
 				return QColor(H2rename::ErrorColor);
 			break;
 
@@ -157,7 +152,7 @@ bool RenameRulesModel::setData(const QModelIndex &index, const QVariant &value, 
 	{
 		if (index.row() >= rules.count())
 		{
-			beginInsertRows(QModelIndex(), index.row()+1, index.row()+1);
+			beginInsertRows(QModelIndex(), index.row() + 1, index.row() + 1);
 			rules.append(RenameRule());
 			endInsertRows();
 		}
@@ -171,14 +166,12 @@ bool RenameRulesModel::setData(const QModelIndex &index, const QVariant &value, 
 	return false;
 }
 
-
 QVariant RenameRulesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 	if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
 		return (QStringList() << tr("Ersetze") << tr("durch") << tr("Regel automatisch erzeugt aus")).at(section);
 	return QVariant();
 }
-
 
 Qt::ItemFlags RenameRulesModel::flags(const QModelIndex &index) const
 {
@@ -207,7 +200,7 @@ QModelIndex RenameRulesModel::appendCreatedRule(const QString &text)
 	rules.append(newRule);
 	endInsertRows();
 	emit rulesChanged();
-	return index(rules.count()-1, 0);
+	return index(rules.count() - 1, 0);
 }
 
 QModelIndex RenameRulesModel::prependCreatedRule(const QString &text)
@@ -223,30 +216,27 @@ QModelIndex RenameRulesModel::prependCreatedRule(const QString &text)
 void RenameRulesModel::removeRowList(const QVector<bool> &rowlist)
 {
 	beginResetModel();
-	for (int i=rowlist.count()-1; i>=0; --i)
-		if (rowlist.at(i) && i<rules.count())
+	for (int i = rowlist.count() - 1; i >= 0; --i)
+		if (rowlist.at(i) && i < rules.count())
 			rules.removeAt(i);
 	endResetModel();
 	emit rulesChanged();
 }
 
-
-const QString& RenameRulesModel::searchAt(int row) const
+const QString &RenameRulesModel::searchAt(int row) const
 {
 	return rules.at(row).column[RenameRule::Search];
 }
 
-const QString& RenameRulesModel::replaceAt(int row) const
+const QString &RenameRulesModel::replaceAt(int row) const
 {
 	return rules.at(row).column[RenameRule::Replace];
 }
 
-
 NamesModel::NamesModel(QObject *parent)
-: QAbstractTableModel(parent), namesCount(0), nChanged(0), nCollisions(0)
+	: QAbstractTableModel(parent), namesCount(0), nChanged(0), nCollisions(0)
 {
 }
-
 
 void NamesModel::setDirectories(const QVector<Directory> &directories)
 {
@@ -281,7 +271,7 @@ void NamesModel::setHighlights(const QVector<bool> &highlights)
 	this->highlights = highlights;
 	if (namesCount > 0)
 	{
-		emit dataChanged(index(0, 0), index(namesCount-1, 1));
+		emit dataChanged(index(0, 0), index(namesCount - 1, 1));
 		emit highlightsChanged();
 	}
 }
@@ -290,7 +280,7 @@ void NamesModel::clearHighlights()
 {
 	highlights.clear();
 	if (namesCount > 0)
-		emit dataChanged(index(0, 0), index(namesCount-1, 1));
+		emit dataChanged(index(0, 0), index(namesCount - 1, 1));
 }
 
 int NamesModel::rowCount(const QModelIndex & /* parent */) const
@@ -298,12 +288,10 @@ int NamesModel::rowCount(const QModelIndex & /* parent */) const
 	return namesCount;
 }
 
-
 int NamesModel::columnCount(const QModelIndex & /* parent */) const
 {
 	return 2;
 }
-
 
 QVariant NamesModel::data(const QModelIndex &index, int role) const
 {
@@ -324,8 +312,7 @@ QVariant NamesModel::data(const QModelIndex &index, int role) const
 				return tr("FIXME");
 			}
 		case Qt::ToolTipRole:
-			return (constNameAt(index.row()).typeString())
-				+ " in " + constNameAt(index.row()).path;
+			return (constNameAt(index.row()).typeString()) + " in " + constNameAt(index.row()).path;
 		case Qt::BackgroundRole:
 			if (isCollision(index))
 				return QColor(H2rename::CollisionColor);
@@ -352,10 +339,10 @@ void applyRename(Directory &dir)
 	dir.nChanged = dir.nCollisions = 0;
 	for (QVector<Name>::iterator p = dir.names.begin(); p != dir.names.end(); ++p)
 	{
-		//p->newname = RenameRulesModel::globalInstance().applyRules(p->name);
+		// p->newname = RenameRulesModel::globalInstance().applyRules(p->name);
 		p->newname = p->name;
 		p->usedRule.resize(RenameRulesModel::globalInstance().rowCount(QModelIndex()) - 1);
-		for (int i=0; i<RenameRulesModel::globalInstance().rowCount(QModelIndex()) - 1; ++i)
+		for (int i = 0; i < RenameRulesModel::globalInstance().rowCount(QModelIndex()) - 1; ++i)
 		{
 			const QString &search = RenameRulesModel::globalInstance().searchAt(i);
 			const QString &replace = RenameRulesModel::globalInstance().replaceAt(i);
@@ -403,7 +390,7 @@ bool NamesModel::isHighlight(const QModelIndex &index) const
 	if (index.isValid())
 	{
 		const Name &name = constNameAt(index.row());
-		for (int i=0; i<highlights.count() && i < name.usedRule.count(); ++i)
+		for (int i = 0; i < highlights.count() && i < name.usedRule.count(); ++i)
 			if (highlights.at(i) && name.usedRule.at(i))
 				return true;
 	}
@@ -435,26 +422,25 @@ void NamesModel::computeNewNames()
 			nChanged += p->nChanged;
 			nCollisions += p->nCollisions;
 			if (firstCollision == -1 && p->nCollisions > 0)
-			{	// find first collision
-				for (int i=0; i<p->names.count(); ++i)
+			{ // find first collision
+				for (int i = 0; i < p->names.count(); ++i)
 					if (!p->names.at(i).isUnique)
 					{
 						firstCollision = i + rowOffset.at(p - directories.constBegin());
 						break;
 					}
 			}
-
 		}
 
-		emit dataChanged(index(0, 1, QModelIndex()), index(namesCount-1, 1, QModelIndex()));
+		emit dataChanged(index(0, 1, QModelIndex()), index(namesCount - 1, 1, QModelIndex()));
 		NamesFilterProxyModel::globalInstance().invalidate();
 		if (nCollisions > 0)
-			emit collisionDetected(index(firstCollision,1));
+			emit collisionDetected(index(firstCollision, 1));
 		QApplication::restoreOverrideCursor();
 	}
 }
 
-const Name& NamesModel::constNameAt(int row) const
+const Name &NamesModel::constNameAt(int row) const
 {
 	QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
 	if (p == rowOffset.constEnd() || *p > row)
@@ -464,7 +450,7 @@ const Name& NamesModel::constNameAt(int row) const
 	return directories.at(i).names.at(j);
 }
 
-Name& NamesModel::nameAt(int row)
+Name &NamesModel::nameAt(int row)
 {
 	QVector<int>::const_iterator p = qUpperBound(rowOffset.constBegin(), rowOffset.constEnd(), row);
 	if (p == rowOffset.constEnd() || *p > row)
@@ -486,23 +472,21 @@ bool NamesFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &s
 	switch (curFilter)
 	{
 	case ShowChanged:
-		return static_cast<NamesModel*>(sourceModel())->isChanged(index);
+		return static_cast<NamesModel *>(sourceModel())->isChanged(index);
 	case ShowHighlights:
-		return static_cast<NamesModel*>(sourceModel())->isHighlight(index);
+		return static_cast<NamesModel *>(sourceModel())->isHighlight(index);
 	case ShowCollisions:
-		return static_cast<NamesModel*>(sourceModel())->isCollision(index);
-	default:
-		;
+		return static_cast<NamesModel *>(sourceModel())->isCollision(index);
+	default:;
 	}
 	return true;
 }
-
 
 H2rename::H2rename(QWidget *parent, Qt::WindowFlags flags)
 	: QWidget(parent, flags)
 {
 	ui.setupUi(this);
-	
+
 	ui.tableView_replacements->setModel(&RenameRulesModel::globalInstance());
 	ui.tableView_replacements->verticalHeader()->hide();
 	ui.tableView_replacements->horizontalHeader()->setStretchLastSection(true);
@@ -517,42 +501,41 @@ H2rename::H2rename(QWidget *parent, Qt::WindowFlags flags)
 	insertRuleAction->setShortcut(tr("Ctrl+E"));
 	insertRuleAction->setIconVisibleInMenu(false);
 	connect(insertRuleAction, SIGNAL(triggered()),
-		this, SLOT(on_pushButton_insertRow_clicked()));
+			this, SLOT(on_pushButton_insertRow_clicked()));
 	ui.tableView_replacements->addAction(insertRuleAction);
 
 	removeRulesAction = new QAction(tr("Regel(n) &löschen"), this);
 	removeRulesAction->setShortcut(tr("Ctrl+L"));
 	removeRulesAction->setIconVisibleInMenu(false);
 	connect(removeRulesAction, SIGNAL(triggered()),
-		this, SLOT(on_pushButton_removeRow_clicked()));
+			this, SLOT(on_pushButton_removeRow_clicked()));
 	ui.tableView_replacements->addAction(removeRulesAction);
 
 	createRuleAction = new QAction(tr("&Regel erzeugen"), this);
 	createRuleAction->setShortcut(tr("Ctrl+R"));
 	createRuleAction->setIconVisibleInMenu(false);
 	connect(createRuleAction, SIGNAL(triggered()),
-		this, SLOT(createRule()));
+			this, SLOT(createRule()));
 	ui.tableView_names->addAction(createRuleAction);
 
 	connect(&RenameRulesModel::globalInstance(), SIGNAL(rulesChanged()),
-		&NamesModel::globalInstance(), SLOT(computeNewNames()));
-	connect(&RenameRulesModel::globalInstance(), SIGNAL(rowsRemoved (const QModelIndex &, int, int) ),
-		&NamesModel::globalInstance(), SLOT(computeNewNames()));
+			&NamesModel::globalInstance(), SLOT(computeNewNames()));
+	connect(&RenameRulesModel::globalInstance(), SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+			&NamesModel::globalInstance(), SLOT(computeNewNames()));
 	connect(&NamesModel::globalInstance(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
-		this, SLOT(updateNumbers()));
-	connect(ui.tableView_names->selectionModel(), SIGNAL(selectionChanged (const QItemSelection &, const QItemSelection &)),
-		this, SLOT(namesSelectionChanged()));
-	connect(ui.tableView_replacements->selectionModel(), SIGNAL(selectionChanged (const QItemSelection &, const QItemSelection &)),
-		this, SLOT(replacementsSelectionChanged()));
+			this, SLOT(updateNumbers()));
+	connect(ui.tableView_names->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+			this, SLOT(namesSelectionChanged()));
+	connect(ui.tableView_replacements->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+			this, SLOT(replacementsSelectionChanged()));
 	connect(&NamesModel::globalInstance(), SIGNAL(collisionDetected(const QModelIndex &)),
-		this, SLOT(collisionDetected(const QModelIndex &)));
+			this, SLOT(collisionDetected(const QModelIndex &)));
 	connect(&NamesModel::globalInstance(), SIGNAL(highlightsChanged()),
-		&NamesFilterProxyModel::globalInstance(), SLOT(highlightsChanged()));
+			&NamesFilterProxyModel::globalInstance(), SLOT(highlightsChanged()));
 }
 
 H2rename::~H2rename()
 {
-
 }
 
 QChar H2rename::parseUTF8Char(QString::const_iterator &p, QString::const_iterator end)
@@ -560,15 +543,15 @@ QChar H2rename::parseUTF8Char(QString::const_iterator &p, QString::const_iterato
 	if (p == end)
 		return QChar();
 
-	QString::const_iterator q=p;
+	QString::const_iterator q = p;
 	ushort decoded;
-	
+
 	if (q->unicode() < 0x80 || q->unicode() >= 0x100)
 		return QChar();
 	else if ((q->unicode() & 0xffe0) == 0xc0)
-	{	// two byte character
+	{ // two byte character
 		decoded = (q->unicode() & 0x1f) << 6;
-		if (++q == end ||(q->unicode() & 0xffc0) != 0x80)
+		if (++q == end || (q->unicode() & 0xffc0) != 0x80)
 			return QChar();
 		decoded |= q->unicode() & 0x3f;
 		p = ++q;
@@ -588,27 +571,24 @@ QChar H2rename::parseUTF8Char(QString::const_iterator &p, QString::const_iterato
 		return QChar(decoded);
 	}
 	else if ((p->unicode() & 0xf0) == 0xf0)
-	{	// four byte charater not implemented FIXME
+	{ // four byte charater not implemented FIXME
 		return QChar();
 	}
 	return QChar(); // otherwise invalid
 }
-
 
 void H2rename::updateNumbers()
 {
 	int nNames = NamesModel::globalInstance().rowCount();
 	int nChanges = NamesModel::globalInstance().changedNamesCount();
 	int nCollisions = NamesModel::globalInstance().collisionCount();
-	ui.label_numbers->setText(tr("%1 %2, %3 %4").arg(nNames).arg(nNames==1?tr("Name"):tr("Namen")).arg(nChanges).arg(nChanges==1?tr("Änderung"):tr("Änderungen")));
+	ui.label_numbers->setText(tr("%1 %2, %3 %4").arg(nNames).arg(nNames == 1 ? tr("Name") : tr("Namen")).arg(nChanges).arg(nChanges == 1 ? tr("Änderung") : tr("Änderungen")));
 	ui.pushButton_Rename->setEnabled(nChanges - nCollisions > 0);
 	if (NamesModel::globalInstance().collisionCount() > 0)
-		ui.label_collisions->setText(tr("%1 %2!").arg(NamesModel::globalInstance().collisionCount())
-		.arg(NamesModel::globalInstance().collisionCount() == 1 ? tr("Namenskollision") : tr("Namenskollisionen")));
+		ui.label_collisions->setText(tr("%1 %2!").arg(NamesModel::globalInstance().collisionCount()).arg(NamesModel::globalInstance().collisionCount() == 1 ? tr("Namenskollision") : tr("Namenskollisionen")));
 	else
 		ui.label_collisions->setText("");
 }
-
 
 void ReadDirThread::run()
 {
@@ -630,7 +610,6 @@ void ReadDirThread::abort()
 	aborted = true;
 }
 
-
 bool ReadDirThread::readDirectory(const QString &path)
 {
 	{
@@ -641,7 +620,7 @@ bool ReadDirThread::readDirectory(const QString &path)
 	QDir dir(path);
 	if (!dir.exists())
 	{
-		error = tr("Das Verzeichnis '%1' existiert nicht").arg(path); 
+		error = tr("Das Verzeichnis '%1' existiert nicht").arg(path);
 		return false;
 	}
 	emit processing(path);
@@ -668,23 +647,21 @@ bool ReadDirThread::readDirectory(const QString &path)
 	return true;
 }
 
-
 void ReadDirThread::analyseNames()
 {
 	QVector<Directory>::const_iterator d;
 	for (d = directories.constBegin(); d != directories.constEnd(); ++d)
 	{
 		QVector<Name>::const_iterator p;
-		for (p=d->names.constBegin(); p != d->names.constEnd(); ++p)
+		for (p = d->names.constBegin(); p != d->names.constEnd(); ++p)
 			analyseName(p->name);
 	}
 }
 
-
 void ReadDirThread::analyseName(const QString &s)
 {
 	QString::const_iterator p;
-	for (p = s.constBegin(); p != s.constEnd(); )
+	for (p = s.constBegin(); p != s.constEnd();)
 	{
 		QString decoded;
 		QString::const_iterator start = p;
@@ -710,7 +687,7 @@ void ReadDirThread::analyseName(const QString &s)
 					break;
 			}
 			QString replace;
-			for (QString::const_iterator q=start; q != p; ++q)
+			for (QString::const_iterator q = start; q != p; ++q)
 				replace += *q;
 			if (!replacements.contains(replace))
 			{
@@ -720,14 +697,12 @@ void ReadDirThread::analyseName(const QString &s)
 		else
 			++p;
 	}
-			
 }
-
 
 void H2rename::on_pushButton_SelectDir_clicked()
 {
-	QString path = QFileDialog::getExistingDirectory(this, tr("Verzeichnis wählen"), 
-		ui.lineEdit_DirName->text(), QFileDialog::ShowDirsOnly);
+	QString path = QFileDialog::getExistingDirectory(this, tr("Verzeichnis wählen"),
+													 ui.lineEdit_DirName->text(), QFileDialog::ShowDirsOnly);
 	ui.lineEdit_DirName->setText(QDir::toNativeSeparators(path));
 	if (!path.isEmpty())
 		readDirs();
@@ -752,7 +727,8 @@ void H2rename::readDirs()
 			else
 			{
 				QStringList repstrings = readDirThread.replacements.keys();
-				qStableSort(repstrings.begin(), repstrings.end(), isLongerThan);
+				// qStableSort(repstrings.begin(), repstrings.end(), isLongerThan);
+				std::stable_sort(repstrings.begin(), repstrings.end(), isLongerThan);
 				QList<RenameRule> rules;
 				foreach (QString replace, repstrings)
 				{
@@ -762,8 +738,8 @@ void H2rename::readDirs()
 				{
 					RenameRulesModel::globalInstance().appendRules(rules);
 					ui.comboBox->setCurrentIndex(NamesFilterProxyModel::ShowChanged);
-					//ui.tableView_replacements->resizeColumnToContents(0);
-					//ui.tableView_replacements->resizeColumnToContents(1);
+					// ui.tableView_replacements->resizeColumnToContents(0);
+					// ui.tableView_replacements->resizeColumnToContents(1);
 				}
 
 				NamesModel::globalInstance().setDirectories(readDirThread.directories);
@@ -777,10 +753,6 @@ void H2rename::readDirs()
 	}
 }
 
-
-
-
-
 void H2rename::on_pushButton_insertRow_clicked()
 {
 	RenameRulesModel::globalInstance().insertRow(ui.tableView_replacements->currentIndex().row());
@@ -793,16 +765,15 @@ void H2rename::on_pushButton_removeRow_clicked()
 	{
 		QVector<bool> rows(nRules);
 		QItemSelectionModel *sel = ui.tableView_replacements->selectionModel();
-		for (int i=0; i<nRules; ++i)
+		for (int i = 0; i < nRules; ++i)
 			rows[i] = sel->rowIntersectsSelection(i, QModelIndex());
 		RenameRulesModel::globalInstance().removeRowList(rows);
 		replacementsSelectionChanged();
 	}
 }
 
-
 ReadDirProgressDialog::ReadDirProgressDialog(QWidget *parent, Qt::WindowFlags flags)
-: QDialog(parent, flags)
+	: QDialog(parent, flags)
 {
 	ui.setupUi(this);
 }
@@ -815,20 +786,19 @@ void H2rename::on_lineEdit_DirName_returnPressed()
 void H2rename::on_pushButton_Rename_clicked()
 {
 	int renameCount = NamesModel::globalInstance().changedNamesCount() -
-		NamesModel::globalInstance().collisionCount();
+					  NamesModel::globalInstance().collisionCount();
 	if (renameCount == 0)
 		return; // should not happen; button should be inactive
 
-	QString text = tr("Sie sind im Begriff, %1 %2 umzubenennen.").arg(renameCount)
-		.arg(renameCount==1 ? tr("Datei/Verzeichnis") : tr("Dateien/Verzeichnisse"));
+	QString text = tr("Sie sind im Begriff, %1 %2 umzubenennen.").arg(renameCount).arg(renameCount == 1 ? tr("Datei/Verzeichnis") : tr("Dateien/Verzeichnisse"));
 	if (NamesModel::globalInstance().collisionCount() > 0)
 		text += tr(" %1 %2 aufgrund von Namenskollisionen nicht umbenannt.")
-		.arg(NamesModel::globalInstance().collisionCount())
-		.arg(NamesModel::globalInstance().collisionCount() == 1 ? tr("wird") : tr("werden"));
+					.arg(NamesModel::globalInstance().collisionCount())
+					.arg(NamesModel::globalInstance().collisionCount() == 1 ? tr("wird") : tr("werden"));
 	text += tr(" Fortfahren?");
 
 	if (QMessageBox::Yes == QMessageBox::warning(this, tr("H2rename - Umbenennen starten?"), text,
-		QMessageBox::Yes | QMessageBox::No))
+												 QMessageBox::Yes | QMessageBox::No))
 	{
 		QProgressDialog progress(this);
 		progress.setLabelText(tr("Umbenennen läuft ..."));
@@ -836,7 +806,7 @@ void H2rename::on_pushButton_Rename_clicked()
 		progress.setModal(true);
 
 		int nDone = 0;
-		for (int i=0; i<NamesModel::globalInstance().rowCount(); ++i)
+		for (int i = 0; i < NamesModel::globalInstance().rowCount(); ++i)
 		{
 			Name &name = NamesModel::globalInstance().nameAt(i);
 			if (name.isChanged && name.isUnique)
@@ -845,18 +815,18 @@ void H2rename::on_pushButton_Rename_clicked()
 				QString newFullName = name.path + QDir::separator() + name.newname;
 				if (!QFile::rename(oldFullName, newFullName))
 				{
-					QMessageBox::critical(this, tr("H2rename"), 
-						tr("Konnte %1 \"%2\" nicht in \"%3\" umbenennen.")
-						.arg(name.typeString())
-						.arg(oldFullName)
-						.arg(newFullName)
-						, QMessageBox::Ok);
+					QMessageBox::critical(this, tr("H2rename"),
+										  tr("Konnte %1 \"%2\" nicht in \"%3\" umbenennen.")
+											  .arg(name.typeString())
+											  .arg(oldFullName)
+											  .arg(newFullName),
+										  QMessageBox::Ok);
 					break;
 				}
 				name.name = name.newname;
 				if (name.type == Name::Directory)
-				{	// clean up path names for contained files and dirs
-					for (int j=0; j<i; ++j)
+				{ // clean up path names for contained files and dirs
+					for (int j = 0; j < i; ++j)
 					{
 						Name &jname = NamesModel::globalInstance().nameAt(j);
 						if (jname.path.startsWith(oldFullName))
@@ -888,7 +858,7 @@ void H2rename::namesSelectionChanged()
 			const QVector<bool> &highlights = NamesModel::globalInstance().constNameAt(NamesFilterProxyModel::globalInstance().mapToSource(li.at(0)).row()).usedRule;
 			RenameRulesModel::globalInstance().setHighlights(highlights);
 			ui.tableView_replacements->clearSelection();
-			for (int i=0; i<highlights.count(); ++i)
+			for (int i = 0; i < highlights.count(); ++i)
 				if (highlights.at(i))
 				{
 					ui.tableView_replacements->scrollTo(RenameRulesModel::globalInstance().index(i, 0));
@@ -907,13 +877,13 @@ void H2rename::replacementsSelectionChanged()
 		RenameRulesModel::globalInstance().clearHighlights();
 		ui.tableView_names->clearSelection();
 		QVector<bool> selectedRules(RenameRulesModel::globalInstance().rowCount(QModelIndex()));
-		for (int i=0; i<RenameRulesModel::globalInstance().rowCount(QModelIndex()); ++i)
+		for (int i = 0; i < RenameRulesModel::globalInstance().rowCount(QModelIndex()); ++i)
 			selectedRules[i] = sel->rowIntersectsSelection(i, QModelIndex());
 		NamesModel::globalInstance().setHighlights(selectedRules);
 		if (NamesFilterProxyModel::globalInstance().filterType() != NamesFilterProxyModel::ShowHighlights)
 		{
-			for (int i=0; i<NamesFilterProxyModel::globalInstance().rowCount(QModelIndex()); ++i)
-				if (NamesFilterProxyModel::globalInstance().data(NamesFilterProxyModel::globalInstance().index(i, 0),Qt::UserRole).toBool())
+			for (int i = 0; i < NamesFilterProxyModel::globalInstance().rowCount(QModelIndex()); ++i)
+				if (NamesFilterProxyModel::globalInstance().data(NamesFilterProxyModel::globalInstance().index(i, 0), Qt::UserRole).toBool())
 				{
 					ui.tableView_names->scrollTo(NamesFilterProxyModel::globalInstance().index(i, 0));
 					break;
@@ -928,7 +898,6 @@ void H2rename::collisionDetected(const QModelIndex &firstCollision)
 {
 	ui.tableView_names->scrollTo(NamesFilterProxyModel::globalInstance().mapFromSource(firstCollision));
 }
-
 
 void H2rename::on_comboBox_currentIndexChanged(int index)
 {
@@ -949,7 +918,7 @@ void H2rename::createRule()
 			else
 				newIndex = RenameRulesModel::globalInstance().appendCreatedRule(text);
 			ui.tableView_replacements->selectionModel()->select(newIndex,
-				QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent);
+																QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent);
 			ui.tableView_replacements->scrollTo(newIndex);
 			ui.tableView_replacements->setFocus(Qt::OtherFocusReason);
 		}
