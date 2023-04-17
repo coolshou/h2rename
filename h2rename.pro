@@ -5,6 +5,7 @@ QT += concurrent
 
 # Input
 HEADERS += \
+    src/aboutdialog.h \
     src/mainwindow.h \
     src/directory.h \
     src/h2rename.h \
@@ -16,13 +17,16 @@ HEADERS += \
     src/renamerule.h \
     src/renamerulesmodel.h \
     src/version.h
+
 FORMS += \
+    src/aboutdialog.ui \
     src/mainwindow.ui \
     src/h2rename.ui \
     src/ReadDirProgress.ui \
     src/mainwindow.ui
 
 SOURCES += \
+    src/aboutdialog.cpp \
     src/mainwindow.cpp \
     src/h2rename.cpp \
     src/main.cpp \
@@ -76,8 +80,8 @@ win32 {
     RC_ICONS=$$PWD/images/h2rename.ico #：指定應該被包含進一個.rc檔案中的圖示，僅適用於Windows
     QMAKE_TARGET_COMPANY="coolshou.idv.tw" #：指定項目目標的公司名稱，僅適用於Windows
     QMAKE_TARGET_PRODUCT=$${TARGET} #：指定項目目標的產品名稱，僅適用於Windows
-    QMAKE_TARGET_DESCRIPTION="qt base iperf server launcher" #：指定項目目標的描述資訊，僅適用於Windows
-    QMAKE_TARGET_COPYRIGHT="Copyright 2022 coolshou.idv.tw" #：指定項目目標的版權資訊，僅適用於Windows
+    QMAKE_TARGET_DESCRIPTION="qt base file rename tool" #：指定項目目標的描述資訊，僅適用於Windows
+    QMAKE_TARGET_COPYRIGHT="Copyright 2023 coolshou.idv.tw" #：指定項目目標的版權資訊，僅適用於Windows
     #PACKAGE_DOMAIN：
     #PACKAGE_VERSION：
     RC_CODEPAGE=0x04b0 #unicode：指定應該被包含進一個.rc檔案中的字碼頁，僅適用於Windows
@@ -93,6 +97,3 @@ win32 {
 
     QMAKE_EXTRA_TARGETS +=  deploy
 }
-
-#DISTFILES += \
-#    lang/h2rename_zh_TW.ts
