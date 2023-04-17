@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include "h2rename.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +35,8 @@ int main(int argc, char *argv[])
     // qtTranslator.load("qt_" + QLocale::system().name(), ":/");
     // a.installTranslator(&qtTranslator);
 
-    H2rename w;
+    //H2rename w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

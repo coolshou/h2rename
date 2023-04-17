@@ -5,6 +5,7 @@ QT += concurrent
 
 # Input
 HEADERS += \
+    src/mainwindow.h \
     src/directory.h \
     src/h2rename.h \
     src/name.h \
@@ -16,10 +17,13 @@ HEADERS += \
     src/renamerulesmodel.h \
     src/version.h
 FORMS += \
+    src/mainwindow.ui \
     src/h2rename.ui \
-    src/ReadDirProgress.ui
+    src/ReadDirProgress.ui \
+    src/mainwindow.ui
 
 SOURCES += \
+    src/mainwindow.cpp \
     src/h2rename.cpp \
     src/main.cpp \
     src/namesfilterproxymodel.cpp \
@@ -38,7 +42,8 @@ TRANSLATIONS_DIR = $$OUT_PWD/lang
 TRANSLATIONS = \
     lang/h2rename.ts \
         lang/h2rename_de.ts \
-        lang/h2rename_nl.ts
+        lang/h2rename_nl.ts \
+        lang/h2rename_zh_TW.ts
 
 # Tell qmake to run lrelease after the project is built
 QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS
@@ -88,3 +93,6 @@ win32 {
 
     QMAKE_EXTRA_TARGETS +=  deploy
 }
+
+#DISTFILES += \
+#    lang/h2rename_zh_TW.ts
