@@ -5,14 +5,28 @@ QT += concurrent
 
 # Input
 HEADERS += \
-    src/h2rename.h
+    src/directory.h \
+    src/h2rename.h \
+    src/name.h \
+    src/namesfilterproxymodel.h \
+    src/namesmodel.h \
+    src/readdirprogressdialog.h \
+    src/readdirthread.h \
+    src/renamerule.h \
+    src/renamerulesmodel.h \
+    src/version.h
 FORMS += \
     src/h2rename.ui \
     src/ReadDirProgress.ui
 
 SOURCES += \
     src/h2rename.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/namesfilterproxymodel.cpp \
+    src/namesmodel.cpp \
+    src/readdirprogressdialog.cpp \
+    src/readdirthread.cpp \
+    src/renamerulesmodel.cpp
 
 OTHER_FILES += \
     h2rename.nsi \

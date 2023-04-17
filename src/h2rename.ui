@@ -13,8 +13,21 @@
   <property name="windowTitle">
    <string>H2rename 0.8.2</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../h2rename.qrc">
+    <normaloff>:/h2rename</normaloff>:/h2rename</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item row="0" column="0">
@@ -79,6 +92,9 @@
          <property name="contextMenuPolicy">
           <enum>Qt::ActionsContextMenu</enum>
          </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>200</number>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -194,6 +210,9 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -298,6 +317,8 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../h2rename.qrc"/>
+ </resources>
  <connections/>
 </ui>
