@@ -21,11 +21,18 @@ OTHER_FILES += \
 #RC_FILE = \
 #    h2rename.rc
 
+# Tell qmake to generate the .qm files in the build directory
+TRANSLATIONS_DIR = $$OUT_PWD/lang
+
 TRANSLATIONS = \
     lang/h2rename.ts \
 	lang/h2rename_de.ts \
 	lang/h2rename_nl.ts
-# TODO: update ts to qm
+
+# Tell qmake to run lrelease after the project is built
+QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS 
+#-qm $$TRANSLATIONS_DIR
+
 
 RESOURCES += \
     h2rename.qrc
