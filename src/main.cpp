@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QTranslator appTranslator;
-    appTranslator.load("h2rename_" + QLocale::system().name(), ":/lang");
+    appTranslator.load("h2rename_" + QLocale::system().name(), ":/");
+    //appTranslator.load(":/i18n/h2rename_" + QLocale::system().name()+ ".qm");
     a.installTranslator(&appTranslator);
 
     // QTranslator qtTranslator;

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="qt_de">lang/qt_de.qm</file>
+        <file alias="h2rename">lang/h2rename.qm</file>
+        <file alias="h2rename_de">lang/h2rename_de.qm</file>
+        <file alias="h2rename_nl">lang/h2rename_nl.qm</file>
+        <file alias="h2rename_zh_TW">lang/h2rename_zh_TW.qm</file>
+    </qresource>
+</RCC>

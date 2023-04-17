@@ -3,6 +3,12 @@ TEMPLATE = app
 QT += widgets
 QT += concurrent
 
+CONFIG += lrelease
+
+greaterThan(QT_MAJOR_VERSION, 5) {
+include($$[QT_INSTALL_LIBS]/qt5/mkspecs/features/lrelease.prf)
+}
+
 # Input
 HEADERS += \
     src/aboutdialog.h \
@@ -47,19 +53,12 @@ TRANSLATIONS = \
     lang/h2rename_de.ts \
     lang/h2rename_nl.ts \
     lang/h2rename_zh_TW.ts
-
-# Tell qmake to run lupdate
-lupdate.target = translations
-lupdate.commands = $$[QT_INSTALL_BINS]/lupdate $$PWD -ts $$TRANSLATIONS
-QMAKE_EXTRA_TARGETS += lupdate
-
-#QMAKE_PRE_LINK += $$[QT_INSTALL_BINS]/lupdate $$TRANSLATIONS
-
-# Tell qmake to run lrelease after the project is built
-QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS
+# TODO: lupdate to update ts file
+# TODO: lrelease to update ts to qm files
 
 RESOURCES += \
-    h2rename.qrc
+    h2rename.qrc \
+    lang.qrc
 
 IMAGES.files +=\
     images/h2rename.png

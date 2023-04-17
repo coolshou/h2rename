@@ -1,11 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>lang/qt_de.qm</file>
-        <file>lang/h2rename.qm</file>
-        <file>lang/h2rename_de.qm</file>
-        <file>lang/h2rename_nl.qm</file>
         <file>images/h2rename.ico</file>
         <file alias="h2rename">images/h2rename.png</file>
-        <file>lang/h2rename_zh_TW.qm</file>
     </qresource>
 </RCC>
