@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>H2Rename</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../h2rename.qrc">
+    <normaloff>:/h2rename</normaloff>:/h2rename</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
@@ -23,15 +27,26 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuAbout">
+   <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>&amp;About</string>
+     <string>&amp;Help</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuAbout"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="iconText">
+    <string>&amp;About</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../h2rename.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -42,7 +42,7 @@ H2rename::H2rename(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
     ui.setupUi(this);
-    setWindowTitle(QString(H2RENAME_NAME) + QString(" ") + QString(H2RENAME_VER) );
+
     ui.tableView_replacements->setModel(&RenameRulesModel::globalInstance());
     ui.tableView_replacements->verticalHeader()->hide();
     ui.tableView_replacements->horizontalHeader()->setStretchLastSection(true);

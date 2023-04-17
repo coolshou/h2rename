@@ -22,8 +22,7 @@ FORMS += \
     src/aboutdialog.ui \
     src/mainwindow.ui \
     src/h2rename.ui \
-    src/ReadDirProgress.ui \
-    src/mainwindow.ui
+    src/ReadDirProgress.ui
 
 SOURCES += \
     src/aboutdialog.cpp \
@@ -45,9 +44,16 @@ TRANSLATIONS_DIR = $$OUT_PWD/lang
 
 TRANSLATIONS = \
     lang/h2rename.ts \
-        lang/h2rename_de.ts \
-        lang/h2rename_nl.ts \
-        lang/h2rename_zh_TW.ts
+    lang/h2rename_de.ts \
+    lang/h2rename_nl.ts \
+    lang/h2rename_zh_TW.ts
+
+# Tell qmake to run lupdate
+lupdate.target = translations
+lupdate.commands = $$[QT_INSTALL_BINS]/lupdate $$PWD -ts $$TRANSLATIONS
+QMAKE_EXTRA_TARGETS += lupdate
+
+#QMAKE_PRE_LINK += $$[QT_INSTALL_BINS]/lupdate $$TRANSLATIONS
 
 # Tell qmake to run lrelease after the project is built
 QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS

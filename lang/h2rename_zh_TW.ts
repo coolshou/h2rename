@@ -2,11 +2,38 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_TW">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../src/aboutdialog.ui" line="14"/>
+        <source>About</source>
+        <translation>關於</translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.ui" line="23"/>
+        <source>Auther:</source>
+        <translation>作者:</translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.ui" line="42"/>
+        <source>Original Auther:</source>
+        <translation>原始作者:</translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.ui" line="52"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Noto Sans CJK TC&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;© 2009 by Harald Bögeholz / c&apos;t &lt;a href=&quot;http://www.ctmagazin.de/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;www.ctmagazin.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>H2rename</name>
     <message>
         <location filename="../src/h2rename.cpp" line="56"/>
         <source>Regel &amp;einfügen</source>
-        <translation>(&amp;E)插入規則</translation>
+        <translation>插入規則(&amp;E)</translation>
     </message>
     <message>
         <location filename="../src/h2rename.cpp" line="57"/>
@@ -206,6 +233,25 @@
         <location filename="../src/h2rename.ui" line="304"/>
         <source>&amp;copy; 2009 by Harald Bögeholz / c&apos;t &lt;a href=&quot;http://www.ctmagazin.de/&quot;&gt;www.ctmagazin.de&lt;/a&gt;</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../src/mainwindow.ui" line="14"/>
+        <source>H2Rename</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.ui" line="32"/>
+        <source>&amp;Help</source>
+        <translation>幫助(&amp;H)</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.ui" line="41"/>
+        <location filename="../src/mainwindow.ui" line="44"/>
+        <source>&amp;About</source>
+        <translation>關於(&amp;A)</translation>
     </message>
 </context>
 <context>

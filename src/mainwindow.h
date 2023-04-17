@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "h2rename.h"
+#include "aboutdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,9 +20,12 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void actAbout();
 private:
     Ui::MainWindow *ui;
     H2rename *h2rename;
+    AboutDialog *dlg;
 };
 
 #endif // MAINWINDOW_H
