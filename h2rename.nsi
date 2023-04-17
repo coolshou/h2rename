@@ -1,7 +1,7 @@
 /*
 	This file is part of H2rename.
 
-	Copyright (C) 2009 by Harald Bögeholz / c't Magazin für Computertechnik
+	Copyright (C) 2009 by Harald BÃ¶geholz / c't Magazin fÃ¼r Computertechnik
 	www.ctmagazin.de
 
 	This program is free software: you can redistribute it and/or modify
@@ -43,7 +43,7 @@ Section "Installer"
 	CreateShortCut "$SMPROGRAMS\H2rename.lnk" "$INSTDIR\H2rename.exe"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "DisplayName" "H2rename"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "UninstallString" "$INSTDIR\uninstall.exe"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "Publisher" "c't Magazin für Computertechnik"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "Publisher" "c't Magazin fÃ¼r Computertechnik"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "URLInfoAbout" "http://www.ctmagazin.de"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "DisplayVersion" "0.7.4"
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\H2rename" "VersionMajor" 0
