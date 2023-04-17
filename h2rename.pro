@@ -32,21 +32,16 @@ OTHER_FILES += \
     h2rename.nsi \
     license.txt
 
-#RC_FILE = \
-#    h2rename.rc
-
 # Tell qmake to generate the .qm files in the build directory
 TRANSLATIONS_DIR = $$OUT_PWD/lang
 
 TRANSLATIONS = \
     lang/h2rename.ts \
-	lang/h2rename_de.ts \
-	lang/h2rename_nl.ts
+        lang/h2rename_de.ts \
+        lang/h2rename_nl.ts
 
 # Tell qmake to run lrelease after the project is built
-QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS 
-#-qm $$TRANSLATIONS_DIR
-
+QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/lrelease $$TRANSLATIONS
 
 RESOURCES += \
     h2rename.qrc
@@ -55,7 +50,6 @@ IMAGES.files +=\
     images/h2rename.png
 
 unix {
-
     DESKTOP.path = /usr/share/applications/
     DESKTOP.files = h2rename.desktop
     IMAGES.path = /usr/share/pixmaps/
@@ -68,8 +62,6 @@ unix {
         target \
         IMAGES \
         DESKTOP
-
-    
 }
 
 win32 {
@@ -95,5 +87,4 @@ win32 {
         windeployqt $$DIST_FILE
 
     QMAKE_EXTRA_TARGETS +=  deploy
-
 }
